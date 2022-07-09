@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:news_app/views/authentication/authentication_controller.dart';
 
 import '../../constants/common.dart';
+import 'register_view.dart';
 
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);
@@ -87,6 +88,10 @@ class LoginView extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: _authenticationController.onLogin,
                   child: const Text('Login'))),
+          SizedBox(height: Insets.verticalBetweenPadding.r),
+          GestureDetector(
+              onTap: () => Get.offAll(() => RegisterView()),
+              child: const Text('Don\'t have an account?')),
         ]),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:news_app/views/authentication/authentication_controller.dart';
+import 'package:news_app/views/authentication/login_view.dart';
 
 import '../../constants/common.dart';
 
@@ -96,7 +97,13 @@ class RegisterView extends StatelessWidget {
               height: 50.h,
               child: ElevatedButton(
                   onPressed: _authenticationController.onRegister,
-                  child: const Text('Register')))
+                  child: const Text('Register'))),
+          SizedBox(height: Insets.verticalBetweenPadding.r),
+          GestureDetector(
+              onTap: () => Get.offAll(() => LoginView()),
+              child: const Text(
+                'Already have an account?',
+              ))
         ]),
       ),
     );
