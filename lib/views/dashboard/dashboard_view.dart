@@ -93,7 +93,8 @@ class DashboardView extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'See All',
-                    style: Get.textTheme.labelSmall,
+                    style: Get.textTheme.labelSmall!
+                        .copyWith(color: Get.theme.primaryColorLight),
                   ),
                   SizedBox(
                     width: 15.w,

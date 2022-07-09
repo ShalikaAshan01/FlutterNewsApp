@@ -177,7 +177,6 @@ class _FilterViewState extends State<FilterView> {
           .toList(),
     );
   }
-
   Widget _buildCountry() {
     return Wrap(
       children: NewsCountry.values
