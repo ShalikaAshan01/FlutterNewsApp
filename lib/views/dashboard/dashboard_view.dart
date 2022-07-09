@@ -52,7 +52,7 @@ class DashboardView extends StatelessWidget {
         Row(
           children: <Widget>[
             Text(
-              'Latest News',
+              ' Latest News',
               style: Get.textTheme.titleLarge,
             ),
             const Spacer(),
