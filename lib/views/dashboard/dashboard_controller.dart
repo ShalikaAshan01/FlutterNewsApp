@@ -12,6 +12,7 @@ class DashboardController extends GetxController {
   RxList<Articles> news = <Articles>[].obs;
   RxBool headlineLoading = false.obs;
   RxBool newsLoading = false.obs;
+  RxInt activeIndex = 0.obs;
   Rx<NewsCategory> newsCategory = NewsCategory.health.obs;
   TextEditingController searchController = TextEditingController();
 
@@ -55,5 +56,9 @@ class DashboardController extends GetxController {
       Get.to(() => SearchView(), arguments: searchController.text);
       searchController.clear();
     }
+  }
+
+  void onPageChanged(int index) {
+    activeIndex.value = index;
   }
 }

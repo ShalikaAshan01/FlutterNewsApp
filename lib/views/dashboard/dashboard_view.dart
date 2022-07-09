@@ -19,28 +19,36 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: REdgeInsets.symmetric(
-              horizontal: Insets.horizontalScreenPadding.r),
-          child: Obx(() => SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                        height: ScreenUtil().screenHeight * .35,
-                        child: _buildTop()),
-                    Padding(
-                        padding: REdgeInsets.symmetric(
-                            vertical: Insets.verticalBetweenPadding.r * .25),
-                        child: _buildCategoryButtons()),
-                    _buildNewsList()
-                  ],
-                ),
-              )),
+    return Obx(() => Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: REdgeInsets.symmetric(
+                  horizontal: Insets.horizontalScreenPadding.r),
+              child: _buildBody()[_dashboardController.activeIndex.value],
+            ),
+          ),
+          floatingActionButton: _bottomAppBar(),
+        ));
+  }
+
+  List<Widget> _buildBody() {
+    return [
+      SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+                height: ScreenUtil().screenHeight * .35, child: _buildTop()),
+            Padding(
+                padding: REdgeInsets.symmetric(
+                    vertical: Insets.verticalBetweenPadding.r * .25),
+                child: _buildCategoryButtons()),
+            _buildNewsList()
+          ],
         ),
       ),
-    );
+      _favorite(),
+      _account()
+    ];
   }
 
   Widget _buildTop() {
@@ -172,6 +180,67 @@ class DashboardView extends StatelessWidget {
           article: _dashboardController.news[index],
         );
       },
+    );
+  }
+
+  Widget _bottomAppBar() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Card(
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(300.h),
+        ),
+        child: Padding(
+          padding: REdgeInsets.symmetric(
+              horizontal: Insets.extraLarge.r, vertical: Insets.large.r),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _bottomNavigationBarItem('Home', Icons.home_outlined, 0),
+              _bottomNavigationBarItem('Favorite', Icons.favorite_border, 1),
+              _bottomNavigationBarItem(
+                  'Profile', Icons.emoji_emotions_outlined, 2),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _bottomNavigationBarItem(String text, IconData iconData, int index) {
+    final bool isActive = _dashboardController.activeIndex.value == index;
+    Color color = isActive ? Get.theme.primaryColor : const Color(0xFF818181);
+    return GestureDetector(
+      onTap: () => _dashboardController.onPageChanged(index),
+      child: Padding(
+        padding: REdgeInsets.symmetric(horizontal: Insets.large.r),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              iconData,
+              color: color,
+            ),
+            Text(
+              text,
+              style: TextStyle(color: color),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _favorite() {
+    return const Center(
+      child: Text('Favorite'),
+    );
+  }
+
+  Widget _account() {
+    return const Center(
+      child: Text('Account'),
     );
   }
 }
