@@ -89,6 +89,7 @@ class AppThemes {
       inputDecorationTheme: InputDecorationTheme(
         iconColor: _lightSecondaryTextColor,
         hintStyle: _bodyMedium.copyWith(color: _lightSecondaryTextColor),
+        labelStyle: _bodyMedium.copyWith(color: _lightPrimaryColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(48),
           borderSide: const BorderSide(

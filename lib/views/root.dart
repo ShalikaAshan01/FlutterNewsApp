@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/views/dashboard/dashboard_view.dart';
+import 'package:news_app/views/authentication/register_view.dart';
 
 /// This class will navigate the user to login screen or dashboard screen
 class Root extends StatelessWidget {
@@ -8,6 +8,6 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DashboardView();
+    return RegisterView();
   }
 }
