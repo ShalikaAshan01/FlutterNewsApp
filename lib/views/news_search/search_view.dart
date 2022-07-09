@@ -41,6 +41,7 @@ class SearchView extends StatelessWidget {
           child: TextField(
             controller: _searchController.searchController,
             onEditingComplete: () => _searchController.onSearch(),
+            textInputAction: TextInputAction.search,
             decoration: InputDecoration(
                 hintText: 'Search news...',
                 suffixIcon: GestureDetector(

@@ -67,6 +67,7 @@ class DashboardView extends StatelessWidget {
                 child: TextField(
                   controller: _dashboardController.searchController,
                   onEditingComplete: () => _dashboardController.onSearch(),
+                  textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                       hintText: 'Search news...',
                       suffixIcon: GestureDetector(
