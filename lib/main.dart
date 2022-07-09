@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:news_app/constants/app_routes.dart';
 
 import 'constants/app_themes.dart';
+import 'utils/authentication_manager.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,7 @@ void main() async{
 }
 // register all getx controllers
 void _registerGetX() {
-  // Get.put<AuthenticationManager>(AuthenticationManager());
+  Get.put<AuthenticationManager>(AuthenticationManager());
   // Get.put<LoginController>(LoginController());
 
 }

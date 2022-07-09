@@ -2,18 +2,17 @@ import 'package:get_storage/get_storage.dart';
 
 mixin CacheManager {
   ///save user data
-  Future<bool> saveUserData(String token, String name, String email) async {
+  Future<bool> saveUserData(String email, String password) async {
     final box = GetStorage();
-    await box.write(CacheManagerKey.token.toString(), token);
     await box.write(CacheManagerKey.email.toString(), email);
-    await box.write(CacheManagerKey.name.toString(), name);
+    await box.write(CacheManagerKey.password.toString(), password);
+    await box.write(CacheManagerKey.loggedIn.toString(), true);
     return true;
   }
 
-  /// get user token
-  String? getToken() {
+  void changeLoginStatus(bool status) {
     final box = GetStorage();
-    return box.read(CacheManagerKey.token.toString());
+    box.write(CacheManagerKey.loggedIn.toString(), status);
   }
 
   /// get saved user's email
@@ -22,17 +21,22 @@ mixin CacheManager {
     return box.read(CacheManagerKey.email.toString());
   }
 
-  /// get saved user's name
-  String? getName() {
+  bool? getLoggedInStatus() {
     final box = GetStorage();
-    return box.read(CacheManagerKey.name.toString());
+    return box.read(CacheManagerKey.loggedIn.toString());
+  }
+
+  /// get saved user's password
+  String? getPassword() {
+    final box = GetStorage();
+    return box.read(CacheManagerKey.password.toString());
   }
 
   /// remove user data
   Future<void> remove() async {
     final box = GetStorage();
-    await box.remove(CacheManagerKey.token.toString());
+    await box.remove(CacheManagerKey.loggedIn.toString());
   }
 }
 
-enum CacheManagerKey { token, name, email }
+enum CacheManagerKey { email, password, loggedIn }

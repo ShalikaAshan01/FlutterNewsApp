@@ -6,26 +6,22 @@ class AuthenticationManager extends GetxController with CacheManager {
   static AuthenticationManager to = Get.find();
 
   final isLogged = false.obs;
-  final token = ''.obs;
 
   void logOut() {
     isLogged.value = false;
-    remove();
+    changeLoginStatus(false);
   }
 
-  Future<void> login(String token,String name,String email) async {
+  Future<void> register(String email, String password) async {
     isLogged.value = true;
-    //User data is cached
-    await saveUserData(token,name,email);
+    saveUserData(email, password);
+    changeLoginStatus(true);
   }
 
   bool checkLoginStatus() {
-
-    token.value = getToken()??'';
-    if (token.isNotEmpty == true) {
-      isLogged.value = true;
-    }
+    bool status = getLoggedInStatus() ?? false;
+    isLogged.value = status;
+    print(status);
     return isLogged.value;
   }
-
 }

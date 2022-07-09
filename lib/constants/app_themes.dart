@@ -29,7 +29,7 @@ class AppThemes {
     fontSize: 16.0.sp,
   );
   static final TextStyle _headlineMedium =
-      TextStyle(fontSize: 25.0.sp, fontWeight: FontWeight.w500);
+      TextStyle(fontSize: 25.0.sp, fontWeight: FontWeight.w800);
   static final TextStyle _headlineLarge =
       TextStyle(fontSize: 30.0.sp, fontWeight: FontWeight.bold);
 
