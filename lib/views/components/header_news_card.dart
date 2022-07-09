@@ -36,17 +36,32 @@ class HeaderNewsCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(AppBorderRadius.cardRadius.r),
-              child: SizedBox.expand(
-                  child: image.isEmpty
-                      ? _buildSkeletonCard(noCard: true)
-                      : CachedNetworkImage(
-                          placeholder: (_, __) =>
-                              _buildSkeletonCard(noCard: true),
-                          imageUrl: image,
-                          fit: BoxFit.cover,
-                          errorWidget: (_, __, ___) =>
-                              _buildSkeletonCard(noCard: true),
-                        )),
+              child: Container(
+                foregroundDecoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.black,
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.black
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: [0, 0.5, 0.5, 1],
+                  ),
+                ),
+                child: SizedBox.expand(
+                    child: image.isEmpty
+                        ? _buildSkeletonCard(noCard: true)
+                        : CachedNetworkImage(
+                            placeholder: (_, __) =>
+                                _buildSkeletonCard(noCard: true),
+                            imageUrl: image,
+                            fit: BoxFit.cover,
+                            errorWidget: (_, __, ___) =>
+                                _buildSkeletonCard(noCard: true),
+                          )),
+              ),
             ),
             Padding(
               padding: REdgeInsets.symmetric(
