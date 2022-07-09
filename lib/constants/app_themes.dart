@@ -19,7 +19,7 @@ class AppThemes {
   static final TextStyle _titleSmall =
       TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w600);
   static final TextStyle _titleMedium =
-      TextStyle(fontSize: 18.0.sp, fontWeight: FontWeight.w800);
+      TextStyle(fontSize: 18.0.sp, fontWeight: FontWeight.w400);
   static final TextStyle _titleLarge = GoogleFonts.merriweather(
       textStyle: TextStyle(fontSize: 22.0.sp, fontWeight: FontWeight.w800));
 

@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:news_app/models/news_category.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/services/news_services.dart';
+import 'package:news_app/views/authentication/login_view.dart';
 
+import '../../utils/authentication_manager.dart';
 import '../news_list/news_list_view.dart';
 import '../news_search/search_view.dart';
 
@@ -15,6 +17,7 @@ class DashboardController extends GetxController {
   RxInt activeIndex = 0.obs;
   Rx<NewsCategory> newsCategory = NewsCategory.health.obs;
   TextEditingController searchController = TextEditingController();
+  final AuthenticationManager authenticationManager = AuthenticationManager.to;
 
   @override
   void onInit() {
@@ -66,5 +69,10 @@ class DashboardController extends GetxController {
   /// change index of active tab
   void onPageChanged(int index) {
     activeIndex.value = index;
+  }
+
+  void onLogout() {
+    authenticationManager.changeLoginStatus(false);
+    Get.offAll(() => LoginView());
   }
 }

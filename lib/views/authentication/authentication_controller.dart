@@ -10,16 +10,26 @@ class AuthenticationController extends GetxController {
       TextEditingController();
   final registerFormKey = GlobalKey<FormState>();
   final AuthenticationManager authenticationManager = AuthenticationManager.to;
+  final RxBool error = false.obs;
 
   Future<void> onRegister() async {
     if (registerFormKey.currentState!.validate()) {
       final res = await authenticationManager.saveUserData(
           emailController.text, passwordController.text);
       if (res) {
-        Get.offAndToNamed(DashboardView.routeName);
+        Get.offAll(() => DashboardView());
       }
-      // If the form is valid, display a snackbar. In the real world,
-      // you'd often call a server or save the information in a database.
+    }
+  }
+
+  Future<void> onLogin() async {
+    String? email = authenticationManager.getEmail();
+    String? password = authenticationManager.getPassword();
+    if (emailController.text == email && passwordController.text == password) {
+      authenticationManager.changeLoginStatus(true);
+      Get.offAll(() => DashboardView());
+    } else {
+      error.value = true;
     }
   }
 }

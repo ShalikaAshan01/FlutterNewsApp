@@ -5,8 +5,8 @@ import 'package:news_app/views/authentication/authentication_controller.dart';
 
 import '../../constants/common.dart';
 
-class RegisterView extends StatelessWidget {
-  RegisterView({Key? key}) : super(key: key);
+class LoginView extends StatelessWidget {
+  LoginView({Key? key}) : super(key: key);
   final AuthenticationController _authenticationController =
       Get.put(AuthenticationController());
 
@@ -26,9 +26,8 @@ class RegisterView extends StatelessWidget {
   Widget _buildBody() {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      child: Form(
-        key: _authenticationController.registerFormKey,
-        child: Column(children: <Widget>[
+      child: Obx(
+        () => Column(children: <Widget>[
           SizedBox(height: Insets.verticalBetweenPadding.r),
           FlutterLogo(
             size: 100.h,
@@ -39,6 +38,14 @@ class RegisterView extends StatelessWidget {
                 ?.copyWith(color: Get.theme.primaryColor),
           ),
           SizedBox(height: Insets.verticalBetweenPadding.r),
+          if (_authenticationController.error.isTrue)
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'Invalid user name or password',
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
           TextFormField(
             controller: _authenticationController.emailController,
             textInputAction: TextInputAction.next,
@@ -74,29 +81,12 @@ class RegisterView extends StatelessWidget {
             ),
           ),
           SizedBox(height: Insets.verticalBetweenPadding.r),
-          TextFormField(
-            obscureText: true,
-            textInputAction: TextInputAction.done,
-            onEditingComplete: _authenticationController.onRegister,
-            controller: _authenticationController.confirmPasswordController,
-            validator: (val) {
-              if (val != _authenticationController.passwordController.text) {
-                return 'Password does not match';
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              hintText: 'Re-enter your Password',
-              labelText: 'Confirm Password',
-            ),
-          ),
-          SizedBox(height: Insets.verticalBetweenPadding.r),
           SizedBox(
               width: double.infinity,
               height: 50.h,
               child: ElevatedButton(
-                  onPressed: _authenticationController.onRegister,
-                  child: const Text('Register')))
+                  onPressed: _authenticationController.onLogin,
+                  child: const Text('Login'))),
         ]),
       ),
     );

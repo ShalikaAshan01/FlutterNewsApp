@@ -244,8 +244,10 @@ class DashboardView extends StatelessWidget {
   }
 
   Widget _account() {
-    return const Center(
-      child: Text('Account'),
+    return Center(
+      child: ElevatedButton(
+          onPressed: _dashboardController.onLogout,
+          child: const Text('Logout')),
     );
   }
 }
