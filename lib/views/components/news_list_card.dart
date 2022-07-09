@@ -27,7 +27,7 @@ class NewsListCard extends StatelessWidget {
     final String image = article.urlToImage ?? '';
     final String author = article.author ?? '';
     final String title = article.title ?? '';
-    final String content = article.content ?? article.description ?? '';
+    final String content = article.description ?? article.content ?? '';
     final DateTime? date = article.publishedAt;
     final double padding = Insets.verticalBetweenPadding.r;
     return GestureDetector(

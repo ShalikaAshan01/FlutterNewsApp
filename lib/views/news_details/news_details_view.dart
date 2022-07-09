@@ -139,7 +139,7 @@ class NewsDetailsView extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           vertical: titleHeight * .6,
           horizontal: Insets.horizontalScreenPadding),
-      child: Text(article.content ?? ''),
+      child: Text(article.description ?? ''),
     );
   }
 }
