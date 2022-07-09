@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,6 +85,7 @@ class NewsDetailsView extends StatelessWidget {
     );
   }
 
+  /// blurred title section of the news details
   Widget _buildTitle(double height) {
     final String author = article.author ?? '';
     final String title = article.title ?? '';
@@ -127,6 +126,7 @@ class NewsDetailsView extends StatelessWidget {
     );
   }
 
+  /// this is the content section of the news details
   Widget _buildContent(double titleHeight) {
     return Container(
       width: double.infinity,

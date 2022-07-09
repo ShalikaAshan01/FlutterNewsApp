@@ -35,6 +35,7 @@ class SearchController extends GetxController {
     }
   }
 
+  /// fetch the data from service.
   Future<void> fetchPage(int pageKey) async {
     try {
       this.totalResults.value = 0;
@@ -60,6 +61,7 @@ class SearchController extends GetxController {
     }
   }
 
+  /// set categories
   void setCategory(String category) {
     if (category == newsCategory.value) {
       newsCategory.value = '';
@@ -69,15 +71,18 @@ class SearchController extends GetxController {
     pagingController.refresh();
   }
 
+  /// actions on search button clicked
   void onSearch() {
     searchText.value = searchController.text;
     pagingController.refresh();
   }
 
+  /// show the filtration bottom sheet.
   Future<void> showFilter() async {
     Get.bottomSheet(const FilterView());
   }
 
+  /// Re call the api service when user save the filter settings.
   void onFilterSave(NewsSortBy? newsSortBy, NewsLanguages? newsLanguages,
       NewsCountry? newsCountry) {
     this.newsSortBy.value = newsSortBy ?? NewsSortBy.publishedAt;

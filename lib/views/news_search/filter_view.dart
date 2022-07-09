@@ -110,6 +110,7 @@ class _FilterViewState extends State<FilterView> {
     );
   }
 
+  /// build the sort by section
   Widget _buildSortBy() {
     return Wrap(
       children: NewsSortBy.values
@@ -132,6 +133,7 @@ class _FilterViewState extends State<FilterView> {
     );
   }
 
+  /// custom chip for sort by, language, country items
   Widget _customChip(
       {required bool selected, required String text, VoidCallback? onPressed}) {
     Color? backgroundColor;
@@ -154,6 +156,7 @@ class _FilterViewState extends State<FilterView> {
         ));
   }
 
+  /// build language list for filtration
   Widget _buildLanguage() {
     return Wrap(
       children: NewsLanguages.values
@@ -177,6 +180,8 @@ class _FilterViewState extends State<FilterView> {
           .toList(),
     );
   }
+
+  /// Build the country list for filtration
   Widget _buildCountry() {
     return Wrap(
       children: NewsCountry.values
@@ -201,9 +206,11 @@ class _FilterViewState extends State<FilterView> {
     );
   }
 
+  /// reset all filters
   void _reset() {
     _newsSortBy = null;
     _newsLanguage = null;
+    _newsCountry = null;
     if (mounted) {
       setState(() {});
     }

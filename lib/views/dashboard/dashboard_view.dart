@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -31,6 +30,7 @@ class DashboardView extends StatelessWidget {
         ));
   }
 
+  /// Builds the body of the dashboard. This includes the all tabs of the dashboard.
   List<Widget> _buildBody() {
     return [
       SingleChildScrollView(
@@ -51,6 +51,7 @@ class DashboardView extends StatelessWidget {
     ];
   }
 
+  /// Builds the top of the dashboard. This includes the header and the search bar.
   Widget _buildTop() {
     if (_dashboardController.headlineLoading.isTrue &&
         _dashboardController.latestNews.isEmpty) {
@@ -123,6 +124,7 @@ class DashboardView extends StatelessWidget {
     );
   }
 
+  /// Builds the top news of the header
   Widget _buildTopNews() {
     if (!_dashboardController.headlineLoading.value) {
       return const HeaderNewsCard();
@@ -142,6 +144,7 @@ class DashboardView extends StatelessWidget {
     );
   }
 
+  /// Builds the category buttons of the dashboard.
   Widget _buildCategoryButtons() {
     return SizedBox(
       height: 45.h,
@@ -160,6 +163,7 @@ class DashboardView extends StatelessWidget {
     );
   }
 
+  /// Builds the news list of the dashboard. This is related to the selected category.
   Widget _buildNewsList() {
     if (_dashboardController.newsLoading.isFalse) {
       return ListView.builder(

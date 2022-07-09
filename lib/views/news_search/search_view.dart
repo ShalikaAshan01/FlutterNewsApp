@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -31,34 +30,7 @@ class SearchView extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryButtons() {
-    return SizedBox(
-      height: 45.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: NewsCategory.values.length + 1,
-        itemBuilder: (BuildContext context, int index) {
-          index = index - 1;
-          if (index == -1) {
-            return CustomButton(
-              onPressed: _searchController.showFilter,
-              text: 'Filter',
-              selected: true,
-              icon: Icons.filter_alt_outlined,
-            );
-          }
-          NewsCategory category = NewsCategory.values[index];
-          return CategoryButton(
-              category: category,
-              onPressed: () => _searchController
-                  .setCategory(category.toString().enumToString()),
-              selected: category ==
-                  _searchController.newsCategory.value.getCategory());
-        },
-      ),
-    );
-  }
-
+  /// Build the body section of search view.
   Widget _buildBody() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -113,6 +85,36 @@ class SearchView extends StatelessWidget {
     );
   }
 
+  /// Builds the category buttons.
+  Widget _buildCategoryButtons() {
+    return SizedBox(
+      height: 45.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: NewsCategory.values.length + 1,
+        itemBuilder: (BuildContext context, int index) {
+          index = index - 1;
+          if (index == -1) {
+            return CustomButton(
+              onPressed: _searchController.showFilter,
+              text: 'Filter',
+              selected: true,
+              icon: Icons.filter_alt_outlined,
+            );
+          }
+          NewsCategory category = NewsCategory.values[index];
+          return CategoryButton(
+              category: category,
+              onPressed: () => _searchController
+                  .setCategory(category.toString().enumToString()),
+              selected: category ==
+                  _searchController.newsCategory.value.getCategory());
+        },
+      ),
+    );
+  }
+
+  /// Skeleton for the initial loading state
   Widget _firstPageProgressIndicator() {
     return Column(
       children: const <Widget>[

@@ -22,6 +22,7 @@ class DashboardController extends GetxController {
     fetchInitialData();
   }
 
+  /// Fetch initial data from the server
   Future<void> fetchInitialData() async {
     final NewsResponse? latestNewsResponse =
         await NewsServices().getTopHeadline();
@@ -32,6 +33,7 @@ class DashboardController extends GetxController {
     headlineLoading.value = true;
   }
 
+  /// fetch news to relevant category
   Future<void> fetchNews() async {
     newsLoading.value = false;
     final NewsResponse? newsResponse =
@@ -42,15 +44,18 @@ class DashboardController extends GetxController {
     newsLoading.value = true;
   }
 
+  /// change the news category
   Future<void> setNewsCategory(NewsCategory category) async {
     newsCategory.value = category;
     fetchNews();
   }
 
+  /// view everything
   void onViewAll() {
     Get.to(() => NewsListView());
   }
 
+  /// on entering to search mode
   void onSearch() {
     if (searchController.text.length > 2) {
       Get.to(() => SearchView(), arguments: searchController.text);
@@ -58,6 +63,7 @@ class DashboardController extends GetxController {
     }
   }
 
+  /// change index of active tab
   void onPageChanged(int index) {
     activeIndex.value = index;
   }
