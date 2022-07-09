@@ -3,8 +3,9 @@ import 'package:news_app/models/news_category.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/services/news_services.dart';
 
+import '../news_list/news_list_view.dart';
+
 class DashboardController extends GetxController {
-  static DashboardController to = Get.find();
   RxList<Articles> latestNews = <Articles>[].obs;
   RxList<Articles> news = <Articles>[].obs;
   RxBool headlineLoading = false.obs;
@@ -40,5 +41,9 @@ class DashboardController extends GetxController {
   Future<void> setNewsCategory(NewsCategory category) async {
     newsCategory.value = category;
     fetchNews();
+  }
+
+  void onViewAll() {
+    Get.to(() => NewsListView(), arguments: newsCategory.value);
   }
 }

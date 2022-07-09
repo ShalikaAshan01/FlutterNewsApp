@@ -13,7 +13,8 @@ import '../../constants/common.dart';
 class DashboardView extends StatelessWidget {
   DashboardView({Key? key}) : super(key: key);
   static const String routeName = '/dashboard';
-  final DashboardController _dashboardController = DashboardController.to;
+  final DashboardController _dashboardController =
+      Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
@@ -55,20 +56,23 @@ class DashboardView extends StatelessWidget {
               style: Get.textTheme.titleLarge,
             ),
             const Spacer(),
-            Row(
-              children: <Widget>[
-                Text(
-                  'See All',
-                  style: Get.textTheme.labelSmall,
-                ),
-                SizedBox(
-                  width: 15.w,
-                ),
-                Icon(
-                  Icons.arrow_right_alt,
-                  color: Get.theme.primaryColorLight,
-                ),
-              ],
+            GestureDetector(
+              onTap: _dashboardController.onViewAll,
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    'See All',
+                    style: Get.textTheme.labelSmall,
+                  ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Icon(
+                    Icons.arrow_right_alt,
+                    color: Get.theme.primaryColorLight,
+                  ),
+                ],
+              ),
             )
           ],
         ),

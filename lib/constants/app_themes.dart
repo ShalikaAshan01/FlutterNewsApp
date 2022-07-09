@@ -34,10 +34,10 @@ class AppThemes {
       TextStyle(fontSize: 30.0.sp, fontWeight: FontWeight.bold);
 
   static final TextStyle _bodySmall = TextStyle(
-    fontSize: 16.0.sp,
+    fontSize: 14.0.sp,
   );
   static final TextStyle _bodyMedium = TextStyle(
-    fontSize: 18.0.sp,
+    fontSize: 16.0.sp,
   );
 
   static const TextStyle _bodyLarge = TextStyle();
@@ -62,8 +62,7 @@ class AppThemes {
     headlineMedium: _headlineMedium.copyWith(color: _lightTextColor),
     headlineLarge: _headlineLarge.copyWith(color: _lightTextColor),
     bodySmall: _bodySmall.copyWith(
-      color: _lightSecondaryTextColor,
-    ),
+        color: _lightTextColor),
     bodyMedium: _bodyMedium.copyWith(color: _lightTextColor),
     bodyLarge: _bodyLarge.copyWith(color: _lightTextColor),
     displaySmall: _displaySmall.copyWith(color: _lightTextColor),

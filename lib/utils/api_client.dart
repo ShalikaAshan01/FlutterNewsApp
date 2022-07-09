@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:io';
 
@@ -11,22 +10,22 @@ class ApiClient {
   static String baseUrl = 'https://newsapi.org/v2';
 
   static Future<Response<dynamic>?> call(
-      String endpoint,
-      ApiMethod method, {
-        FormData? formData,
-        Map<String, dynamic>? data,
-        Map<String, dynamic>? queryParams,
-        bool errorToast = true,
-        bool successToast = false,
-        int successCode = 200,
-        String? overrideUrl,
-      }) async {
+    String endpoint,
+    ApiMethod method, {
+    FormData? formData,
+    Map<String, dynamic>? data,
+    Map<String, dynamic>? queryParams,
+    bool errorToast = true,
+    bool successToast = false,
+    int successCode = 200,
+    String? overrideUrl,
+  }) async {
     try {
       final BaseOptions dioOpt = BaseOptions(
           receiveDataWhenStatusError: true,
-          connectTimeout: 15*1000, // 60 seconds
-          receiveTimeout: 15*1000 // 60 seconds
-      );
+          connectTimeout: 15 * 1000, // 60 seconds
+          receiveTimeout: 15 * 1000 // 60 seconds
+          );
       final Dio dio = Dio(dioOpt);
 
       final Options options = Options(
@@ -34,8 +33,8 @@ class ApiClient {
           validateStatus: (int? status) {
             return true;
           },
-          headers: <String,dynamic>{}
-        // headers: headers,
+          headers: <String, dynamic>{}
+          // headers: headers,
       );
 
       final String uri = '${overrideUrl ?? baseUrl}$endpoint';
@@ -48,7 +47,7 @@ class ApiClient {
         }
       }
       queryParams = queryParams ?? {};
-      queryParams['apiKey'] = '70683de12f864660ba8da0274d4d89e1';
+      queryParams['apiKey'] = _getApiKey();
 
       if (data != null) {
         tempFormData = jsonEncode(data);
@@ -59,14 +58,15 @@ class ApiClient {
 
       switch (method) {
         case ApiMethod.get:
-          response = await dio.get(uri, options: options,queryParameters: queryParams);
+          response = await dio.get(uri,
+              options: options, queryParameters: queryParams);
           break;
         case ApiMethod.post:
-        // FormData temp = formData??FormData.fromMap(data);
+          // FormData temp = formData??FormData.fromMap(data);
           response = await dio.post(uri, data: tempFormData, options: options);
           break;
         case ApiMethod.put:
-          // FormData temp = formData??FormData.fromMap(data);
+        // FormData temp = formData??FormData.fromMap(data);
           response = await dio.put(uri, data: tempFormData, options: options);
           break;
         case ApiMethod.delete:
@@ -84,13 +84,15 @@ class ApiClient {
         //debugPrint(result);
         if (errorToast) {
           if (result == null || result.toString().isEmpty) {
-            EasyLoading.showToast('Invalid api response',
-                toastPosition: EasyLoadingToastPosition.bottom);
+            // EasyLoading.showToast('Invalid api response',
+            //     toastPosition: EasyLoadingToastPosition.bottom);
           } else {
-            final dynamic message = result == null?'':result?['message'] ?? '';
+            final dynamic message =
+                result == null ? '' : result?['message'] ?? '';
             if (message.toString().isNotEmpty) {
-              EasyLoading.showToast(message,
-                  toastPosition: EasyLoadingToastPosition.bottom);
+              debugPrint(message);
+              // EasyLoading.showToast(message,
+              //     toastPosition: EasyLoadingToastPosition.bottom);
             }
           }
         }
@@ -104,6 +106,14 @@ class ApiClient {
     } on Exception catch (_) {
       return null;
     }
+  }
+
+  static String _getApiKey() {
+    List<String> apiKeys = [
+      '70683de12f864660ba8da0274d4d89e1',
+      '1bd2801954ef4585b3742d07cbb47c33'
+    ];
+    return apiKeys[1];
   }
 }
 
