@@ -82,6 +82,8 @@ class AppThemes {
       dividerColor: _lightPrimaryColorDark,
       primaryColorLight: _lightPrimaryColorLight,
       secondaryHeaderColor: _lightSecondaryColor,
+      backgroundColor: white,
+      scaffoldBackgroundColor: white,
       cardTheme: CardTheme(
           elevation: 2,
           shape: RoundedRectangleBorder(
