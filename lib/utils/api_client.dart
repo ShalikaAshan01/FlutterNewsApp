@@ -43,13 +43,12 @@ class ApiClient {
       if (formData != null) {
         tempFormData = formData;
         final Map<String, dynamic> temp = <String, dynamic>{};
-        for(final MapEntry<String, String> e in formData.fields){
+        for (final MapEntry<String, String> e in formData.fields) {
           temp[e.key] = e.value;
         }
-
       }
-      queryParams = queryParams??{};
-      queryParams['x-api-key'] = '70683de12f864660ba8da0274d4d89e1';
+      queryParams = queryParams ?? {};
+      queryParams['apiKey'] = '70683de12f864660ba8da0274d4d89e1';
 
       if (data != null) {
         tempFormData = jsonEncode(data);
@@ -58,7 +57,6 @@ class ApiClient {
       }
       Response<dynamic> response;
 
-      debugPrint('URL: $uri');
       switch (method) {
         case ApiMethod.get:
           response = await dio.get(uri, options: options,queryParameters: queryParams);
@@ -68,14 +66,15 @@ class ApiClient {
           response = await dio.post(uri, data: tempFormData, options: options);
           break;
         case ApiMethod.put:
-        // FormData temp = formData??FormData.fromMap(data);
+          // FormData temp = formData??FormData.fromMap(data);
           response = await dio.put(uri, data: tempFormData, options: options);
           break;
         case ApiMethod.delete:
           response =
-          await dio.delete(uri, data: tempFormData, options: options);
+              await dio.delete(uri, data: tempFormData, options: options);
           break;
       }
+      debugPrint('URL: ${response.realUri.toString()}');
       final dynamic result = response.data;
 
       // print(result);

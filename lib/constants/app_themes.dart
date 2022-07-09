@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:news_app/constants/common.dart';
 
 class AppThemes {
   AppThemes._();
 
   //colors
-  static const Color _lightPrimaryColor = Color(0xFF25a0a2);
+  static const white = Color(0xFFFFFFFF);
+  static const Color _lightPrimaryColor = Color(0xFFFF3A44);
   static const Color _lightTextColor = Colors.black;
-  static const Color _lightPrimaryColorDark = Color(0xFFb0bec5);
-  static const Color _lightSecondaryTextColor = Color(0xFFb0bec5);
-
+  static const Color _lightPrimaryColorDark = Color(0xFFF0F1FA);
+  static const Color _lightPrimaryColorLight = Color(0xFF0080FF);
+  static const Color _lightSecondaryColor = Color(0xFFFFB3B6);
+  static const Color _lightSecondaryTextColor = Color(0xFF0080FF);
+  static final Color shimmerBaseColor = Colors.grey[300]!;
+  static final Color shimmerHighlightColor = Colors.grey[100]!;
   static final TextStyle _titleSmall =
-  TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w600);
-  static TextStyle titleMedium = TextStyle(
-    fontSize: 13.0.sp,
-  );
+      TextStyle(fontSize: 14.0.sp, fontWeight: FontWeight.w600);
   static final TextStyle _titleMedium =
-  TextStyle(fontSize: 18.0.sp, fontWeight: FontWeight.w600);
-  static final TextStyle _titleLarge =
-  TextStyle(fontSize: 22.0.sp, fontWeight: FontWeight.w400);
+      TextStyle(fontSize: 18.0.sp, fontWeight: FontWeight.w800);
+  static final TextStyle _titleLarge = GoogleFonts.merriweather(
+      textStyle: TextStyle(fontSize: 22.0.sp, fontWeight: FontWeight.w800));
 
   static final TextStyle _headlineSmall =
-  TextStyle(fontSize: 20.0.sp, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 20.0.sp, fontWeight: FontWeight.bold);
   static final TextStyle headlineMedium = TextStyle(
     fontSize: 16.0.sp,
   );
   static final TextStyle _headlineMedium =
-  TextStyle(fontSize: 25.0.sp, fontWeight: FontWeight.w500);
+      TextStyle(fontSize: 25.0.sp, fontWeight: FontWeight.w500);
   static final TextStyle _headlineLarge =
-  TextStyle(fontSize: 30.0.sp, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 30.0.sp, fontWeight: FontWeight.bold);
 
   static final TextStyle _bodySmall = TextStyle(
     fontSize: 16.0.sp,
   );
-  static const TextStyle _bodyMedium = TextStyle();
+  static final TextStyle _bodyMedium = TextStyle(
+    fontSize: 18.0.sp,
+  );
 
   static const TextStyle _bodyLarge = TextStyle();
 
@@ -43,8 +47,10 @@ class AppThemes {
   static const TextStyle _displayMedium = TextStyle();
   static const TextStyle _displayLarge = TextStyle();
 
-  static const TextStyle _labelSmall = TextStyle();
-  static const TextStyle _labelMedium = TextStyle();
+  static final TextStyle _labelSmall =
+      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700);
+  static final TextStyle _labelMedium =
+      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600);
   static const TextStyle _labelLarge = TextStyle();
 
   //text theme for light theme
@@ -63,23 +69,37 @@ class AppThemes {
     displaySmall: _displaySmall.copyWith(color: _lightTextColor),
     displayMedium: _displayMedium.copyWith(color: _lightTextColor),
     displayLarge: _displayLarge.copyWith(color: _lightTextColor),
-    labelSmall: _labelSmall.copyWith(color: _lightTextColor),
+    labelSmall: _labelSmall.copyWith(color: _lightSecondaryTextColor),
     labelMedium: _labelMedium.copyWith(color: _lightTextColor),
     labelLarge: _labelLarge.copyWith(color: _lightTextColor),
   );
 
   //the light theme
   static final ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    primaryColor: _lightPrimaryColor,
-    primaryColorDark: _lightPrimaryColorDark,
-    dividerColor: _lightPrimaryColorDark,
-    appBarTheme: AppBarTheme(
-        iconTheme: const IconThemeData(color: Colors.black),
-        color: _lightPrimaryColor,
-        titleTextStyle: _lightTextTheme.headlineSmall),
-    textTheme: _lightTextTheme,
-  );
+      brightness: Brightness.light,
+      primaryColor: _lightPrimaryColor,
+      primaryColorDark: _lightPrimaryColorDark,
+      dividerColor: _lightPrimaryColorDark,
+      primaryColorLight: _lightPrimaryColorLight,
+      secondaryHeaderColor: _lightSecondaryColor,
+      cardTheme: CardTheme(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppBorderRadius.cardRadius))),
+      appBarTheme: AppBarTheme(
+          iconTheme: const IconThemeData(color: Colors.black),
+          color: _lightPrimaryColor,
+          titleTextStyle: _lightTextTheme.headlineSmall),
+      textTheme: GoogleFonts.nunitoTextTheme(_lightTextTheme),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+              primary: _lightPrimaryColor,
+              padding: REdgeInsets.symmetric(
+                  vertical: Insets.large.r, horizontal: Insets.extraLarge.r),
+              textStyle: _labelMedium,
+              shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(AppBorderRadius.buttonRadius.r)))));
 
   //the dark theme
   static final ThemeData darkTheme = lightTheme;

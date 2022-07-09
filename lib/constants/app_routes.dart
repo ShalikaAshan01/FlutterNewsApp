@@ -8,6 +8,6 @@ class AppRoutes {
   AppRoutes._(); //this is to prevent anyone from instantiating this object
   static final List<GetPage> routes = [
     GetPage(name: Root.routeName, page: () => const Root()),
-    GetPage(name: DashboardView.routeName, page: () => const DashboardView()),
+    GetPage(name: DashboardView.routeName, page: () => DashboardView()),
   ];
 }

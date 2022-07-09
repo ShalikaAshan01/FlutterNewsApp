@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:news_app/constants/app_routes.dart';
+import 'package:news_app/views/dashboard/dashboard_controller.dart';
 
 import 'constants/app_themes.dart';
-import 'views/root.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +23,7 @@ void main() async{
 // register all getx controllers
 void _registerGetX() {
   // Get.put<AuthenticationManager>(AuthenticationManager());
-  // Get.put<HomeController>(HomeController());
+  Get.put<DashboardController>(DashboardController());
   // Get.put<LoginController>(LoginController());
 
 }
