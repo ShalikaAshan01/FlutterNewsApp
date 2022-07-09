@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:news_app/extensions/string_extension.dart';
+import 'package:news_app/models/news_country.dart';
 import 'package:news_app/models/news_languages.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/models/news_sort_by.dart';
@@ -13,8 +14,9 @@ class SearchController extends GetxController {
   RxInt totalResults = 0.obs;
   RxString searchText = ''.obs;
   RxString newsCategory = ''.obs;
-  Rx<NewsSortBy?> newsSortBy = NewsSortBy.publishedAt.obs;
+  Rx<NewsSortBy> newsSortBy = NewsSortBy.publishedAt.obs;
   Rx<NewsLanguages> newsLanguage = NewsLanguages.none.obs;
+  Rx<NewsCountry> newsCountry = NewsCountry.none.obs;
   TextEditingController searchController = TextEditingController();
   final PagingController<int, Articles> pagingController =
       PagingController(firstPageKey: 1);
@@ -26,10 +28,11 @@ class SearchController extends GetxController {
     if (argumentData is String) {
       searchText.value = argumentData;
       searchController.text = argumentData;
+      pagingController.addPageRequestListener((pageKey) {
+        fetchPage(pageKey);
+      });
+      onSearch();
     }
-    pagingController.addPageRequestListener((pageKey) {
-      fetchPage(pageKey);
-    });
   }
 
   Future<void> fetchPage(int pageKey) async {
@@ -40,6 +43,7 @@ class SearchController extends GetxController {
           page: pageKey,
           text: searchText.value,
           language: newsLanguage.value,
+          country: newsCountry.value,
           sortBy: newsSortBy.value);
       final List<Articles> newItems = res?.articles ?? <Articles>[];
       final int totalResults = res?.totalResults ?? 0;
@@ -74,13 +78,20 @@ class SearchController extends GetxController {
     Get.bottomSheet(const FilterView());
   }
 
-  void onFilterSave(NewsSortBy? newsSortBy, NewsLanguages? newsLanguages) {
-    this.newsSortBy.value = newsSortBy;
+  void onFilterSave(NewsSortBy? newsSortBy, NewsLanguages? newsLanguages,
+      NewsCountry? newsCountry) {
+    this.newsSortBy.value = newsSortBy ?? NewsSortBy.publishedAt;
     if (newsLanguages == null) {
       newsLanguage.value = NewsLanguages.none;
     } else {
       newsLanguage.value = newsLanguages;
     }
+    if (newsCountry == null) {
+      this.newsCountry.value = NewsCountry.none;
+    } else {
+      this.newsCountry.value = newsCountry;
+    }
+
     Get.back();
     pagingController.refresh();
   }

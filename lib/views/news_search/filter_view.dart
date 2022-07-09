@@ -6,6 +6,7 @@ import 'package:news_app/constants/common.dart';
 import 'package:news_app/models/news_languages.dart';
 import 'package:news_app/models/news_sort_by.dart';
 
+import '../../models/news_country.dart';
 import 'search_controller.dart';
 
 class FilterView extends StatefulWidget {
@@ -18,8 +19,16 @@ class FilterView extends StatefulWidget {
 class _FilterViewState extends State<FilterView> {
   NewsSortBy? _newsSortBy;
   NewsLanguages? _newsLanguage;
+  NewsCountry? _newsCountry;
   final SearchController _searchController = Get.put(SearchController());
   final Color color = const Color(0xFF041E2F);
+
+  @override
+  void initState() {
+    super.initState();
+    _newsSortBy = _searchController.newsSortBy.value;
+    _newsLanguage = _searchController.newsLanguage.value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +74,7 @@ class _FilterViewState extends State<FilterView> {
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () => _searchController.onFilterSave(
-                      _newsSortBy, _newsLanguage),
+                      _newsSortBy, _newsLanguage, _newsCountry),
                   child: Padding(
                     padding: REdgeInsets.all(Insets.medium.r),
                     child: const Text('Save'),
@@ -91,6 +100,11 @@ class _FilterViewState extends State<FilterView> {
             style: Get.textTheme.titleMedium!.copyWith(color: color),
           ),
           _buildLanguage(),
+          Text(
+            'Country',
+            style: Get.textTheme.titleMedium!.copyWith(color: color),
+          ),
+          _buildCountry(),
         ],
       ),
     );
@@ -164,7 +178,35 @@ class _FilterViewState extends State<FilterView> {
     );
   }
 
+  Widget _buildCountry() {
+    return Wrap(
+      children: NewsCountry.values
+          .map((e) => e == NewsCountry.none
+              ? const SizedBox.shrink()
+              : SizedBox(
+                  child: _customChip(
+                      onPressed: () {
+                        if (_newsCountry == e) {
+                          _newsCountry = null;
+                        } else {
+                          _newsCountry = e;
+                        }
+                        if (mounted) {
+                          setState(() {});
+                        }
+                      },
+                      selected: _newsCountry == e,
+                      text: e.enumToString()),
+                ))
+          .toList(),
+    );
+  }
+
   void _reset() {
     _newsSortBy = null;
+    _newsLanguage = null;
+    if (mounted) {
+      setState(() {});
+    }
   }
 }
