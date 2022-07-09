@@ -15,6 +15,14 @@ class NewsListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (article == null) {
+      return _buildSkeletonCard();
+    } else {
+      return _buildNewsCard();
+    }
+  }
+
+  Widget _buildNewsCard() {
     final Articles article = this.article!;
     final String image = article.urlToImage ?? '';
     final String author = article.author ?? '';
@@ -28,21 +36,7 @@ class NewsListCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppBorderRadius.cardRadius.r),
-            child: SizedBox(
-                height: 150.h,
-                width: double.infinity,
-                child: image.isEmpty
-                    ? const SkeletonCard(card: false)
-                    : CachedNetworkImage(
-                        placeholder: (_, __) => const SkeletonCard(card: false),
-                        imageUrl: image,
-                        fit: BoxFit.cover,
-                        errorWidget: (_, __, ___) =>
-                            const SkeletonCard(card: false),
-                      )),
-          ),
+          _buildImage(image),
           if (date != null)
             Padding(
               padding: EdgeInsets.only(top: padding),
@@ -71,6 +65,68 @@ class NewsListCard extends StatelessWidget {
                   style: Get.textTheme.bodySmall
                       ?.copyWith(fontWeight: FontWeight.w700),
                 )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImage(String image) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(AppBorderRadius.cardRadius.r),
+      child: SizedBox(
+          height: 150.h,
+          width: double.infinity,
+          child: image.isEmpty
+              ? const SkeletonCard(card: false)
+              : CachedNetworkImage(
+                  placeholder: (_, __) => const SkeletonCard(card: false),
+                  imageUrl: image,
+                  fit: BoxFit.cover,
+                  errorWidget: (_, __, ___) => const SkeletonCard(card: false),
+                )),
+    );
+  }
+
+  Widget _buildSkeletonCard() {
+    final double height = 15.h;
+    return Padding(
+      padding: REdgeInsets.symmetric(vertical: Insets.verticalBetweenPadding.r),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildImage(''),
+          SizedBox(
+              width: 250.w,
+              height: height,
+              child: const SkeletonCard(card: true)),
+          SizedBox(
+              width: double.infinity,
+              height: height,
+              child: const SkeletonCard(card: true)),
+          SizedBox(
+              width: 350.w,
+              height: height,
+              child: const SkeletonCard(card: true)),
+          SizedBox(
+              width: double.infinity,
+              height: height,
+              child: const SkeletonCard(card: true)),
+          SizedBox(
+              width: double.infinity,
+              height: height,
+              child: const SkeletonCard(card: true)),
+          SizedBox(
+              width: double.infinity,
+              height: height,
+              child: const SkeletonCard(card: true)),
+          SizedBox(
+              width: 200.w,
+              height: height,
+              child: const SkeletonCard(card: true)),
+          SizedBox(
+              width: 150.w,
+              height: height,
+              child: const SkeletonCard(card: true)),
         ],
       ),
     );

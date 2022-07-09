@@ -49,6 +49,8 @@ class NewsListView extends StatelessWidget {
           child: PagedListView<int, Articles>(
             pagingController: _newsListController.pagingController,
             builderDelegate: PagedChildBuilderDelegate<Articles>(
+              firstPageProgressIndicatorBuilder: (_) =>
+                  _firstPageProgressIndicator(),
               itemBuilder: (context, item, index) => Padding(
                 padding: REdgeInsets.symmetric(
                     vertical: Insets.verticalBetweenPadding.r),
@@ -59,6 +61,16 @@ class NewsListView extends StatelessWidget {
             ),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _firstPageProgressIndicator() {
+    return Column(
+      children: const <Widget>[
+        NewsListCard(),
+        NewsListCard(),
+        NewsListCard(),
       ],
     );
   }
