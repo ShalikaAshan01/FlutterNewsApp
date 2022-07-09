@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:news_app/constants/app_themes.dart';
 import 'package:news_app/models/news_category.dart';
 import 'package:news_app/views/components/category_button.dart';
 import 'package:news_app/views/components/header_news_card.dart';
@@ -49,6 +50,36 @@ class DashboardView extends StatelessWidget {
     }
     return Column(
       children: <Widget>[
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: SizedBox(
+                height: 50.h,
+                child: TextField(
+                  controller: _dashboardController.searchController,
+                  onEditingComplete: () => _dashboardController.onSearch(),
+                  decoration: InputDecoration(
+                      hintText: 'Search news...',
+                      suffixIcon: GestureDetector(
+                          onTap: _dashboardController.onSearch,
+                          child: const Icon(Icons.search))),
+                ),
+              ),
+            ),
+            Card(
+              color: Get.theme.primaryColor,
+              shape: const CircleBorder(),
+              child: Padding(
+                padding: REdgeInsets.all(Insets.large.r),
+                child: const Icon(
+                  Icons.notifications_none_rounded,
+                  color: AppThemes.white,
+                ),
+              ),
+            )
+          ],
+        ),
+        SizedBox(height: Insets.verticalBetweenPadding.r),
         Row(
           children: <Widget>[
             Text(

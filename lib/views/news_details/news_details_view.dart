@@ -72,10 +72,10 @@ class NewsDetailsView extends StatelessWidget {
               height: Insets.extraLarge.r * 1.25,
               width: Insets.extraLarge.r * 1.25,
               child: FrostedWidget(
-                child: Padding(
-                  padding: REdgeInsets.only(left: Insets.extraLarge.r * .25),
-                  child: GestureDetector(
-                    onTap: () => Get.back(),
+                child: GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Padding(
+                    padding: REdgeInsets.only(left: Insets.extraLarge.r * .25),
                     child: const Icon(
                       Icons.arrow_back_ios,
                     ),
@@ -115,10 +115,11 @@ class NewsDetailsView extends StatelessWidget {
                 title,
                 style: Get.textTheme.titleLarge!.copyWith(),
               ),
-              Text(
-                author,
-                style: dateStyle,
-              )
+              if (author.isNotEmpty)
+                Text(
+                  'Published by $author',
+                  style: dateStyle,
+                )
             ],
           ),
         ),

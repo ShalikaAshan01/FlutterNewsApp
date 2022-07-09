@@ -1,9 +1,11 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:news_app/models/news_category.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/services/news_services.dart';
 
 import '../news_list/news_list_view.dart';
+import '../news_search/search_view.dart';
 
 class DashboardController extends GetxController {
   RxList<Articles> latestNews = <Articles>[].obs;
@@ -11,6 +13,7 @@ class DashboardController extends GetxController {
   RxBool headlineLoading = false.obs;
   RxBool newsLoading = false.obs;
   Rx<NewsCategory> newsCategory = NewsCategory.health.obs;
+  TextEditingController searchController = TextEditingController();
 
   @override
   void onInit() {
@@ -31,7 +34,7 @@ class DashboardController extends GetxController {
   Future<void> fetchNews() async {
     newsLoading.value = false;
     final NewsResponse? newsResponse =
-        await NewsServices().getTopHeadline(category: newsCategory.value);
+    await NewsServices().getTopHeadline(category: newsCategory.value);
     if (newsResponse != null) {
       news.value = newsResponse.articles ?? [];
     }
@@ -44,6 +47,13 @@ class DashboardController extends GetxController {
   }
 
   void onViewAll() {
-    Get.to(() => NewsListView(), arguments: newsCategory.value);
+    Get.to(() => NewsListView());
+  }
+
+  void onSearch() {
+    if (searchController.text.length > 2) {
+      Get.to(() => SearchView(), arguments: searchController.text);
+      searchController.clear();
+    }
   }
 }

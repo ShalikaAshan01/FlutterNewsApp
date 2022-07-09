@@ -28,7 +28,6 @@ class HeaderNewsCard extends StatelessWidget {
     final Articles article = this.article!;
     final String author = article.author ?? '';
     final String title = article.title ?? '';
-    final String description = article.content ?? '';
     final String image = article.urlToImage ?? '';
     return GestureDetector(
       onTap: () => Get.to(() => NewsDetailsView(article: article)),
@@ -70,13 +69,6 @@ class HeaderNewsCard extends StatelessWidget {
                         .copyWith(color: AppThemes.white),
                   ),
                   const Spacer(),
-                  Text(
-                    description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Get.textTheme.bodySmall!
-                        .copyWith(color: AppThemes.white),
-                  )
                 ],
               ),
             ),

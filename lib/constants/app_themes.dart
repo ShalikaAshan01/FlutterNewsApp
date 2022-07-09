@@ -13,7 +13,7 @@ class AppThemes {
   static const Color _lightPrimaryColorDark = Color(0xFFF0F1FA);
   static const Color _lightPrimaryColorLight = Color(0xFF0080FF);
   static const Color _lightSecondaryColor = Color(0xFFFFB3B6);
-  static const Color _lightSecondaryTextColor = Color(0xFF0080FF);
+  static const Color _lightSecondaryTextColor = Color(0xFF818181);
   static final Color shimmerBaseColor = Colors.grey[300]!;
   static final Color shimmerHighlightColor = Colors.grey[100]!;
   static final TextStyle _titleSmall =
@@ -82,11 +82,31 @@ class AppThemes {
       primaryColorLight: _lightPrimaryColorLight,
       secondaryHeaderColor: _lightSecondaryColor,
       backgroundColor: white,
+      textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: _lightPrimaryColor,
+          selectionHandleColor: _lightPrimaryColor),
       scaffoldBackgroundColor: white,
+      inputDecorationTheme: InputDecorationTheme(
+        iconColor: _lightSecondaryTextColor,
+        hintStyle: _bodyMedium.copyWith(color: _lightSecondaryTextColor),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(48),
+          borderSide: const BorderSide(
+            color: _lightPrimaryColorDark,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(48),
+          borderSide: const BorderSide(
+            color: _lightPrimaryColor,
+          ),
+        ),
+      ),
       cardTheme: CardTheme(
           elevation: 2,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppBorderRadius.cardRadius))),
+              borderRadius:
+                  BorderRadius.circular(AppBorderRadius.cardRadius.r))),
       appBarTheme: AppBarTheme(
           iconTheme: const IconThemeData(color: Colors.black),
           color: _lightPrimaryColor,

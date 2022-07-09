@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:news_app/models/news_category.dart';
 
 extension StringExtension on String {
   double parseDouble() =>
@@ -17,5 +18,26 @@ extension StringExtension on String {
 
   String capitalizeFirstLetter() {
     return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+  }
+
+  NewsCategory? getCategory() {
+    switch (this) {
+      case 'health':
+        return NewsCategory.health;
+      case 'technology':
+        return NewsCategory.technology;
+      case 'business':
+        return NewsCategory.business;
+      case 'entertainment':
+        return NewsCategory.entertainment;
+      case 'general':
+        return NewsCategory.general;
+      case 'science':
+        return NewsCategory.science;
+      case 'sports':
+        return NewsCategory.sports;
+      default:
+        return null;
+    }
   }
 }

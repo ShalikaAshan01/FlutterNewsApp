@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:news_app/extensions/string_extension.dart';
 import 'package:news_app/models/news_response.dart';
 import 'package:news_app/views/components/news_list_card.dart';
 
@@ -38,7 +37,7 @@ class NewsListView extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back_ios)),
             Expanded(
                 child: Text(
-              '${_newsListController.category.toString().enumToString().capitalizeFirst} News',
+              'Latest News',
               style: Get.textTheme.titleLarge!
                   .copyWith(color: Get.theme.primaryColor),
               textAlign: TextAlign.center,
