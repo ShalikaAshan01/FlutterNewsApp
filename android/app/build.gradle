@@ -52,7 +52,23 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    flavorDimensions "newsapp"
+    productFlavors {
+        dev {
+            dimension "newsapp"
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "News App Dev"
+            versionNameSuffix ".dev"
+        }
+        prod {
+            dimension "newsapp"
+            applicationIdSuffix ".prod"
+            resValue "string", "app_name", "News App Prod"
+            versionNameSuffix ".prod"
+        }
+    }
 }
+
 
 flutter {
     source '../..'
