@@ -38,7 +38,6 @@ class SearchController extends GetxController {
   /// fetch the data from service.
   Future<void> fetchPage(int pageKey) async {
     try {
-      this.totalResults.value = 0;
       final res = await NewsServices().getTopHeadline(
           category: newsCategory.value.getCategory(),
           page: pageKey,
