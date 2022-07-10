@@ -1,12 +1,16 @@
-# News App
 ## Demo
 
 ### Screenshots
-<img src="./screenshots/1.png" height="480px"/>
-<img src="./screenshots/2.png" height="480px"/>
-<img src="./screenshots/3.png" height="480px"/>
-<img src="./screenshots/4.png" height="480px"/>
-<img src="./screenshots/5.png" height="480px"/>
+<img src="./screenshots/1.png" height="360px"/>&nbsp;
+<img src="./screenshots/2.png" height="360px"/>&nbsp;
+<img src="./screenshots/3.png" height="360px"/>&nbsp;
+<img src="./screenshots/4.png" height="360px"/>&nbsp;
+<img src="./screenshots/5.png" height="350px"/>
+## Android Video
+[![Watch the video](./screenshots/demo.png)](https://drive.google.com/file/d/1Of8KyHi6Xc2SpMkfxuKe9vacP5NRUjKh/view?usp=sharing)
+
+## IOS Video
+[![Watch the video](./screenshots/demo.png)](https://drive.google.com/file/d/1ReL3MrkBix54nomuiYEOSlUL5iDp1dWR/view?usp=sharing)
 
 ## How to Run
 
