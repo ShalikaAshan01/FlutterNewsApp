@@ -1,16 +1,25 @@
-# news_app
+# News App
+## Demo
 
-A new Flutter project.
+### Screenshots
+<img src="./screenshots/1.png" height="480px"/>
+<img src="./screenshots/2.png" height="480px"/>
+<img src="./screenshots/3.png" height="480px"/>
+<img src="./screenshots/4.png" height="480px"/>
+<img src="./screenshots/5.png" height="480px"/>
 
-## Getting Started
+## How to Run
 
-This project is a starting point for a Flutter application.
+Flutter Version : `3.0.1` <br/>
+Dart Version    : `2.17.1` 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Run app in `dev` environment
+<pre>flutter run -t lib/main_dev.dart  --flavor=dev </pre>
+### Run app in debug mode (Picks up debug signing config)
+<pre>flutter run -t lib/main_dev.dart  --debug --flavor=dev </pre>
+### Run app in release mode (Picks up release signing config)
+<pre>flutter run -t lib/main_dev.dart  --release --flavor=dev </pre>
+### Create appBundle for Android platform. Runs in release mode by default.
+<pre>flutter build appbundle -t lib/main_dev.dart  --flavor=dev </pre>
+### Create APK for dev flavor. Runs in release mode by default.
+<pre>flutter build apk -t lib/main_dev.dart  --flavor=dev </pre>
