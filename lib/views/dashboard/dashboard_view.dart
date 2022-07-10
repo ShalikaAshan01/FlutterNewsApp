@@ -27,6 +27,8 @@ class DashboardView extends StatelessWidget {
             ),
           ),
           floatingActionButton: _bottomAppBar(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
         ));
   }
 
