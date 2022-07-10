@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class ApiClient {
-
   static String baseUrl = 'https://newsapi.org/v2';
 
   static Future<Response<dynamic>?> call(
@@ -35,7 +34,7 @@ class ApiClient {
           },
           headers: <String, dynamic>{}
           // headers: headers,
-      );
+          );
 
       final String uri = '${overrideUrl ?? baseUrl}$endpoint';
       dynamic tempFormData = data;
@@ -91,8 +90,8 @@ class ApiClient {
                 result == null ? '' : result?['message'] ?? '';
             if (message.toString().isNotEmpty) {
               debugPrint(message);
-              // EasyLoading.showToast(message,
-              //     toastPosition: EasyLoadingToastPosition.bottom);
+              EasyLoading.showToast(message,
+                  toastPosition: EasyLoadingToastPosition.bottom);
             }
           }
         }
@@ -109,11 +108,13 @@ class ApiClient {
   }
 
   static String _getApiKey() {
+    //TODO: once the development finished, get the random api key to reduce the api key limitation
     List<String> apiKeys = [
       '70683de12f864660ba8da0274d4d89e1',
-      '1bd2801954ef4585b3742d07cbb47c33'
+      '1bd2801954ef4585b3742d07cbb47c33',
+      '685d873be42844808e29a727796ce233'
     ];
-    return apiKeys[1];
+    return apiKeys[2];
   }
 }
 

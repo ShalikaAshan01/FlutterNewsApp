@@ -1,7 +1,7 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,11 +16,8 @@ Future<Widget> initializeApp(AppConfig config) async {
   await GetStorage.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   _registerGetX();
-  return DevicePreview(
-    enabled: !kReleaseMode,
-    builder: (context) => MyApp(
-      appConfig: config,
-    ), // Wrap your app
+  return MyApp(
+    appConfig: config,
   );
 }
 
@@ -50,7 +47,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppThemes.darkTheme,
           themeMode: ThemeMode.system,
           initialRoute: "/",
-          builder: DevicePreview.appBuilder,
+          builder: EasyLoading.init(),
           getPages: AppRoutes.routes,
         );
       },

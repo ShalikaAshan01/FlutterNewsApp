@@ -55,10 +55,6 @@ class DashboardView extends StatelessWidget {
 
   /// Builds the top of the dashboard. This includes the header and the search bar.
   Widget _buildTop() {
-    if (_dashboardController.headlineLoading.isTrue &&
-        _dashboardController.latestNews.isEmpty) {
-      return const SizedBox.shrink();
-    }
     return Column(
       children: <Widget>[
         Row(
@@ -129,7 +125,8 @@ class DashboardView extends StatelessWidget {
 
   /// Builds the top news of the header
   Widget _buildTopNews() {
-    if (!_dashboardController.headlineLoading.value) {
+    if (!_dashboardController.headlineLoading.value ||
+        _dashboardController.latestNews.isEmpty) {
       return const HeaderNewsCard();
     }
     return PageView.builder(
@@ -168,7 +165,8 @@ class DashboardView extends StatelessWidget {
 
   /// Builds the news list of the dashboard. This is related to the selected category.
   Widget _buildNewsList() {
-    if (_dashboardController.newsLoading.isFalse) {
+    if (_dashboardController.newsLoading.isFalse ||
+        _dashboardController.news.isEmpty) {
       return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
