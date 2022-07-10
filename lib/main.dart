@@ -6,20 +6,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:news_app/constants/app_routes.dart';
+import 'package:news_app/models/app_config.dart';
 
 import 'constants/app_themes.dart';
 import 'utils/authentication_manager.dart';
 
-void main() async{
+Future<Widget> initializeApp(AppConfig config) async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   _registerGetX();
-  runApp(DevicePreview(
+  return DevicePreview(
     enabled: !kReleaseMode,
-    builder: (context) => const MyApp(), // Wrap your app
-  ));
+    builder: (context) => MyApp(
+      appConfig: config,
+    ), // Wrap your app
+  );
 }
+
 // register all getx controllers
 void _registerGetX() {
   Get.put<AuthenticationManager>(AuthenticationManager());
@@ -28,7 +32,8 @@ void _registerGetX() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.appConfig}) : super(key: key);
+  final AppConfig appConfig;
 
   // This widget is the root of your application.
   @override
@@ -37,9 +42,10 @@ class MyApp extends StatelessWidget {
       designSize: const Size(428, 926),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (BuildContext context,Widget? child) {
+      builder: (BuildContext context, Widget? child) {
         return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
+          title: appConfig.appName,
+          debugShowCheckedModeBanner: appConfig.flavor == 'dev',
           theme: AppThemes.lightTheme,
           darkTheme: AppThemes.darkTheme,
           themeMode: ThemeMode.system,
