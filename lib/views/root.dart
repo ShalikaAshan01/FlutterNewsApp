@@ -8,7 +8,7 @@ import 'package:news_app/views/dashboard/dashboard_view.dart';
 class Root extends StatelessWidget {
   Root({Key? key}) : super(key: key);
   static const String routeName = '/';
-  AuthenticationManager _authManager = Get.find();
+  final AuthenticationManager _authManager = Get.find();
 
   @override
   Widget build(BuildContext context) {

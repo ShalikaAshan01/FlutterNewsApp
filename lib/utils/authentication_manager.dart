@@ -21,7 +21,6 @@ class AuthenticationManager extends GetxController with CacheManager {
   bool checkLoginStatus() {
     bool status = getLoggedInStatus() ?? false;
     isLogged.value = status;
-    print(status);
     return isLogged.value;
   }
 }
